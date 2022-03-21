@@ -1,0 +1,7 @@
+#!/bin/bash
+set -eu
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data "${3}" \
+  --header "Authorization: Bearer ${1}" http://localhost:3000/${2}
+echo

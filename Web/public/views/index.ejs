@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Currency Converter in Javascript</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+    <section data-position="channel">
+      <h2>Channels</h2>
+      <ul class="channel">
+        <% for(var i=0; i < channels.length; i++) {%>
+          <li class="channel">
+            <span>
+              <%= channels[i].title %>
+            </span>:
+            <span>
+              <%= channels[i].type %>
+            </span>
+            <span>
+              <%= channels[i].subscriberCount %>
+            </span>
+            <span>
+              <%= channels[i].viewCount %>
+            </span>
+            <span>
+              <%= channels[i].videoCount %>
+            </span>
+          </li>
+          <% } %>
+      </ul>
+    </section>
+      </div>
+</body>
+  
+</html>

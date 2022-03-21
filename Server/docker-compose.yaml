@@ -1,0 +1,50 @@
+version: '3'
+services:
+  triggers:
+    build:
+      context: ../Triggers
+      dockerfile: ./Dockerfile
+    volumes:
+      - ../Triggers/app:/src/app
+    command: yarn run dev
+    networks:
+      - webnet
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+
+  node:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./app:/src/app
+    command: yarn run dev
+    ports:
+      - 3000:3000
+    networks:
+      - webnet
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    
+    
+  mongodb:
+    image: mongo:5.0
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - webnet
+    volumes:
+      - ./data:/data/db
+
+networks:
+  webnet:
+
+volumes:
+  triggers:
+  node:
+  mongodb:

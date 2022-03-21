@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "axios": "^0.26.0",
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "express-jwt": "^6.1.1",
+    "googleapis": "^95.0.0",
+    "jwks-rsa": "^2.0.5",
+    "mongoose": "^6.2.1",
+    "octonode": "^0.10.2",
+    "querystring": "^0.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "dev": "nodemon -w ./app app/app.js"
+  }
+}

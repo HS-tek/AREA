@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html class="h-100">
+   <head>
+      <meta charset="UTF-8" />
+      <title>DashTek</title>
+      <link
+         rel="stylesheet"
+         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+         />
+      <link rel="stylesheet" type="text/css" href="/css/main.css" />
+      <!--<link rel="stylesheet" type="text/css" href="/css/widget.css" />-->
+      <link
+         rel="stylesheet"
+         href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/monokai-sublime.min.css"
+         />
+      <link
+         rel="stylesheet"
+         href="https://use.fontawesome.com/releases/v5.7.2/css/solid.css"
+         integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B"
+         crossorigin="anonymous"
+         />
+      <link
+         rel="stylesheet"
+         href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css"
+         integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+"
+         crossorigin="anonymous"
+         />
+      <link
+         rel="stylesheet"
+         href="https://cdn.auth0.com/js/auth0-samples-theme/1.0/css/auth0-theme.min.css"
+         />
+      <link
+         rel="stylesheet"
+         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+         />
+         <style>
+          .navbar-nav {
+              margin-left: auto;
+          }
+      </style>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+      
+      <script type="text/javascript">
+         (function() {
+             emailjs.init('USER_ID');
+         })();
+     </script>
+      <!--<script> 
+          $(function(){ 
+              $("#includedContent").load("weather.html"); 
+          }); 
+      </script> -->
+
+   </head>
+   <body class="h-100">
+      <div id="app" class="h-100 d-flex flex-column">
+         <div class="nav-container">
+            <!-------------------------------------------------NAVBAR CONDITION---------------------------------------------------------------------------->
+            <nav class="navbar navbar-expand-md navbar-light bg-light ml-auto">
+               <div class="container">
+                  <!-- <div class="navbar-brand logo"></div> --->
+                  <button
+                     class="navbar-toggler"
+                     type="button"
+                     data-toggle="collapse"
+                     data-target="#navbarNav"
+                     aria-controls="navbarNav"
+                     aria-expanded="false"
+                     aria-label="Toggle navigation"
+                     >
+                  <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                     <!--<ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                          <a href="/" class="nav-link route-link">Home</a>
+                        </li>
+                        </ul>-->
+                     <ul class="navbar-nav d-none d-md-block">
+                        <!-- Login button: show if NOT authenticated -->
+                        <li class="nav-item auth-invisible">
+                           <button
+                              id="qsLoginBtn"
+                              onclick="login()"
+                              class="btn btn-primary btn-margin auth-invisible hidden"
+                              >
+                           Log in
+                           </button>
+                        </li>
+                        <!-- / Login button -->
+                        <!-- Fullsize dropdown: show if authenticated -->
+                        <li class="nav-item dropdown auth-visible hidden">
+                           <a
+                              class="nav-link dropdown-toggle"
+                              href="#"
+                              id="profileDropDown"
+                              data-toggle="dropdown"
+                              >
+                              <!-- Profile image should be set to the profile picture from the id token -->
+                              <img
+                                 alt="Profile picture"
+                                 class="nav-user-profile profile-image rounded-circle"
+                                 width="50"
+                                 />
+                           </a>
+                           <div class="dropdown-menu">
+                              <!-- Show the user's full name from the id token here -->
+                              <div class="dropdown-header nav-user-name user-name"></div>
+                              <a
+                                 href="/profile"
+                                 class="dropdown-item dropdown-profile route-link"
+                                 >
+                              <i class="fas fa-user mr-3"></i> Profile
+                              </a>
+                              <a
+                                 href="#"
+                                 class="dropdown-item"
+                                 id="qsLogoutBtn"
+                                 onclick="logout()"
+                                 >
+                              <i class="fas fa-power-off mr-3"></i> Log out
+                              </a>
+                           </div>
+                        </li>
+                        <!-- /Fullsize dropdown -->
+                     </ul>
+                     <!-- Responsive login button: show if NOT authenticated -->
+                     <ul class="navbar-nav d-md-none auth-invisible">
+                        <button
+                           class="btn btn-primary btn-block auth-invisible hidden"
+                           id="qsLoginBtn"
+                           onclick="login()"
+                           >
+                        Log in
+                        </button>
+                     </ul>
+                     <!-- /Responsive login button -->
+                     <!-- Responsive profile dropdown: show if authenticated -->
+                     <ul
+                        class="
+                        navbar-nav
+                        d-md-none
+                        auth-visible
+                        hidden
+                        justify-content-between
+                        "
+                        style="min-height: 125px"
+                        >
+                        <li class="nav-item">
+                           <span class="user-info">
+                              <!-- Profile image should be set to the profile picture from the id token -->
+                              <img
+                                 alt="Profile picture"
+                                 class="
+                                 nav-user-profile
+                                 d-inline-block
+                                 profile-image
+                                 rounded-circle
+                                 mr-3
+                                 "
+                                 width="50"
+                                 />
+                              <!-- Show the user's full name from the id token here -->
+                              <h6 class="d-inline-block nav-user-name user-name"></h6>
+                           </span>
+                        </li>
+                        <li>
+                           <i class="fas fa-user mr-3"></i>
+                           <a href="/profile" class="route-link">Profile</a>
+                        </li>
+                        <li>
+                           <i class="fas fa-power-off mr-3"></i>
+                           <a href="#" id="qsLogoutBtn" onclick="logout()">Log out</a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </nav>
+            <!---------------------------------------END OF NAVBAR CONDITION--------------------------------------------------------------------->
+         </div>
+         <div class="sidenav">
+            <a href="/" class="nav-link route-link" >Home</a>
+            <a href="/profile" class="route-link" >Profile</a>
+            
+            <a href="#myModalGoogleAccount" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+            >Get Connected via Google</a>
+
+            <a href="#myModalGithubAccount" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+            >Get Connected via Github</a>
+
+            <a href="#myModalListREA" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+            >List of Action/REAction</a>
+
+            <a href="#myModalTimer" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+            >Timer</a>
+
+            <a href="#myModalYoutube" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+            >Youtube</a>
+
+            <a href="#myModalDrive" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+            >Google Drive</a>
+
+            <a href="#myModalGithub" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+            >Github</a>
+
+            <a href="#myModalGist" data-toggle="modal" class="MainNavText" id="MainNavHelp" 
+            >Gist</a>
+
+            <a href="#"id="qsLogoutBtn" onclick="logout()">Log out</a>
+         </div>
+         
+         <!----END OF SIDENAV-->
+         <!-------------------------MODAL FUCNTION----------------->
+         <div id="myModalListREA" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+             <!-- Modal content-->
+             <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">List of Action/REAction</h4> 
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p>Action/Reaction (min 15) : </p>
+                  <p>   Youtube : 3</p> 
+                  <p>      New video on a channel (action)</p>
+                  <p>      New comment on a video(action)</p>
+                  <p>      Stat on a video (action)</p>
+                  <p></p>
+                  <p>   Github : 5</p>
+                  <p>      Last commit on a repo (action)</p>  
+                  <p>      New follower on your account  (action)</p>  
+                  <p>      New star on a repo (action)</p>  
+                  <p>      Last ticket on a repo  (action)</p>   
+                  <p>      Create a ticket on a repo (reaction)</p> 
+                  <p></p>  
+                  <p>   Calendar : 1</p>
+                  <p>      Create a event  (reaction)</p>  
+                  <p></p>   
+                  <p>   Timer : 1</p>
+                  <p>      Timer (action)	</p>
+                  <p></p>
+                  <p>   Gmail : 1</p>
+                  <p>      Send a email (reaction)</p> 
+                  <p></p>
+                  <p>   Drive : 1</p>
+                  <p>      Last document (action)</p>  
+                  <p></p>
+                  <p>   Gist : 3</p>
+                  <p>      Last gist (action)	</p>  
+                  <p>      Last comment on gist (action)</p>  
+                  <p>      Create a gist (reaction)</p>  	
+                </div>
+                <div class="modal-footer">
+                </div>
+             </div>
+          </div>
+       </div>
+         <!---------------------------------------------CONNECTION-------------------------------------------------------------------------->
+
+       <div id="myModalGoogleAccount" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                 <h4 class="modal-title">Connection to your Google account</h4> 
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+               </div>
+               <div class="modal-body">
+                  <button class="btn-connection" type="button"><a href="http://localhost:3000/google/request_id">Connect to Google</a></button>
+                  <script>
+                    function connectGoogle(){
+                     userGoogleConnected = true;
+                     alert("value of userGoogleConnected : " + userGoogleConnected + "    Congrat, you've got connected to Google, you can now use Google's Service");
+                     }
+                  </script>
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div id="myModalGithubAccount" class="modal fade" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+               <h4 class="modal-title">Connection to your Github account</h4> 
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               </div>
+               <div class="modal-body">
+                  <button class="btn-connection" type="button"><a href="http://localhost:3000/github/request_id/email@email.fr">Connect to Github</a></button>
+                  <script>
+                    function connectGithub(){
+                     userGithubConnected = true;
+                     alert("value of userGithubConnected : " + userGithubConnected + "    Congrat, you've got connected to Github, you can now use Github's Service");
+                     }
+                  </script>
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+         <!---------------------------------------------SERVICES-------------------------------------------------------------------------->
+
+     <div id="myModalYoutube" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Youtube Service</h4> 
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <p>Choose your Youtube Action from here from here.</p>
+               <div class="btn-group">
+                <div class="dropdown">
+                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Actions
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <a class="dropdown-item" href="#myModalActionYoutube1" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">New video on a channel</a>
+                     <a class="dropdown-item" href="#myModalActionYoutube2" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">New comment on a video</a>
+                     <a class="dropdown-item" href="#myModalActionYoutube3" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Last sub on your account</a>
+                   </div>
+                 </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+         </div>
+      </div>
+     </div>
+
+     <div id="myModalDrive" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Google Drive Service</h4> 
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <p>Choose your Google drive Action from here from here.</p>
+               <div class="btn-group">
+                <div class="dropdown">
+                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Actions
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <a class="dropdown-item" href="#myModalActionDrive" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">New document uploaded</a>
+                   </div>
+                 </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+         </div>
+      </div>
+     </div>
+
+     <div id="myModalGithub" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Github Service</h4> 
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <p>Choose your Github Action from here from here.</p>
+               <div class="btn-group">
+                <div class="dropdown">
+                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Actions
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <a class="dropdown-item" href="#myModalActionGithub1" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Last Commit</a>
+                     <a class="dropdown-item" href="#myModalActionGithub2" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">New start on a repo</a>
+                     <a class="dropdown-item" href="#myModalActionGithub5" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">New follower on your account</a>
+                     <a class="dropdown-item" href="#myModalActionGithub3" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Last ticket on a repo</a>
+                     <!-- <a class="dropdown-item" href="#myModalActionGithub4" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Pull Request</a> -->
+                   </div>
+                 </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+         </div>
+      </div>
+     </div>     
+
+     <div id="myModalTimer" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Timer Service</h4> 
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <p>Choose your Timer Action from here from here.</p>
+               <div class="btn-group">
+                <div class="dropdown">
+                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Actions
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <a class="dropdown-item" href="#myModalActionTimer1" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Action 1</a>
+                   </div>
+                 </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+         </div>
+      </div>
+     </div>     
+
+     <div id="myModalGist" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Gist Service</h4> 
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               <p>Choose your Gist Action from here from here.</p>
+               <div class="btn-group">
+                <div class="dropdown">
+                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Actions
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <a class="dropdown-item" href="#myModalActionGist1" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Last Gist</a>
+                     <a class="dropdown-item" href="#myModalActionGist2" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Last Comment</a>
+                   </div>
+                 </div>
+              </div>
+            </div>
+
+            <script type="text/javascript">
+               window.onload = function() {
+                   document.getElementById('dropdownMenuButton').addEventListener('button', function(event) {
+                       event.preventDefault();
+                       emailjs.sendForm('contact_service', 'dropdownMenuButton', this)
+                           .then(function() {
+                               console.log('SUCCESS!');
+                           }, function(error) {
+                               console.log('FAILED...', error);
+                           });
+                   });
+               }
+           </script>
+
+            <div class="modal-footer">
+            </div>
+         </div>
+      </div>
+     </div> 
+         <!---------------------------------------------ACTION GITHUB-------------------------------------------------------------------------->
+         <div id="myModalActionGithub1" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Last Commit</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert everytime there are a new commit in the repository. </p>
+                     <p>Please write the name of the repository you want to survey.</p>
+                  </div>
+
+                  <script>
+                     let alertText1 = "Le repository à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+
+                     <input type="hidden" name="id" value="gh_last_commit" />
+                     
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     
+                     <input type="hidden" name="typeform" value="action" />
+
+                     <label for="email">Repository</label>
+                     <input type="text" name="repo" />
+                 
+                     <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertText1)">Submit</button>
+                   </form>
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn-dropdown btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+         </div> 
+
+         <div id="myModalActionGithub2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">New star on a repo</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert everytime there are a new star on your repo. </p>
+                     <p>Please write the name of the repository you want to survey.</p>
+                  </div>
+
+                  <script>
+                     let alertTextgh2 = "Le repository à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+
+                     <input type="hidden" name="id" value="gh_last_star" />
+                     
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     
+                     <input type="hidden" name="typeform" value="action" />
+
+                     <label for="email">Repository</label>
+                     <input type="text" name="repo" />
+                 
+                     <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertTextgh2)">Submit</button>
+                   </form>
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn-dropdown btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div id="myModalActionGithub5" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">New follower on your account</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert everytime there are a new follower on your account. </p>
+                  </div>
+
+                  <script>
+                     let alertTextgh23 = "Le repository à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+
+                     <input type="hidden" name="id" value="gh_last_follower" />
+                     
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     
+                     <input type="hidden" name="typeform" value="action" />
+                 
+                     <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertTextgh23)">Submit</button>
+                   </form>
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn-dropdown btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+         <div id="myModalActionGithub3" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Last ticket on a repo</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert with the last ticket in the repository. </p>
+                     <p>Please write the name of the repository you want to survey.</p>
+                  </div>
+
+                  <script>
+                     let alertTextgh3 = "Le repository à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+
+                     <input type="hidden" name="id" value="gh_last_issue" />
+                     
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     
+                     <input type="hidden" name="typeform" value="action" />
+
+                     <label for="repo">Repository</label>
+                     <input type="text" name="repo" />
+                 
+                     <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertTextgh3)">Submit</button>
+                   </form>
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn-dropdown btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div id="myModalActionGithub4" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">New pull request on a repo</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert when you have a new pull request in the repository. </p>
+                     <p>Please write the name of the repository you want to survey.</p>
+                  </div>
+
+                  <script>
+                     let alertTextgh4 = "Le repository à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+
+                     <input type="hidden" name="id" value="gh_last_commit" />
+                     
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     
+                     <input type="hidden" name="typeform" value="action" />
+
+                     <label for="email">Repository</label>
+                     <input type="text" name="repo" />
+                 
+                     <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertTextgh4)">Submit</button>
+                   </form>
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn-dropdown btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+         </div>
+ 
+
+          <!---------------------------------------------ACTION GIST-------------------------------------------------------------------------->
+
+         <div id="myModalActionGist1" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Last Gist</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                     <p>Get last gist.</p>
+                  </div>
+
+                  <script>
+                     let alertText4 = "Votre choix à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     <input type="hidden" name="id" value="gh_last_gist" />
+
+                     <input type="hidden" name="typeform" value="action" />
+                 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertText4)">Submit</button>
+                  </form>
+                  
+
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+         </div> 
+
+         <div id="myModalActionGist2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Last comment</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert everytime a issues is declared . </p>
+                     <p>Please write the gist repo.</p>
+                  </div>
+
+                  <script>
+                     let alertTexteth ="Votre choix à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+                     <input type="hidden" name="id" value="gh_last_comment" />
+                     
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     
+                     <input type="hidden" name="typeform" value="action" />
+
+                     <label for="gist">Gist</label>
+                     <input type="text" name="gist" />
+                 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertTexteth)">Submit</button>
+                  </form>
+                  
+
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div> 
+           
+         <!---------------------------------------------ACTION TIMER-------------------------------------------------------------------------->
+
+          <div id="myModalActionTimer1" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Timer Action 1</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                     <p>You choose to repeat a reaction all x second. </p>
+                     <p>Please write the number of seconde you want between in each reaction.</p>
+                  </div>
+
+                  <script>
+                     let alertText5 = "Votre choix à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     <input type="hidden" name="id" value="gh_time" />
+
+                     <input type="hidden" name="typeform" value="action" />
+
+                     <label for="interval">Interval</label>
+                     <input placeholder="time in seconds" type="text" name="interval" />
+                 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertText5)">Submit</button>
+                  </form>
+                  
+
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div> 
+         
+          <!---------------------------------------------ACTION GOOGLE DRIVE-------------------------------------------------------------------------->
+
+          <div id="myModalActionDrive" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">New document uploaded</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert everytime there are a new document uploaded in your google drive. </p>
+                  </div>
+
+                  <script>
+                     let alertTextd = "Votre choix à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     <input type="hidden" name="typeform" value="action" />
+                     <input type="hidden" name="id" value="drive_last_file" />
+
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertTextd)">Submit</button>
+                  </form>
+                  
+
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div> 
+         
+         <!---------------------------------------------ACTION YOUTUBE-------------------------------------------------------------------------->
+
+         <div id="myModalActionYoutube1" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">New video on a channel</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert everytime there are a New video on a channel. </p>
+                     <p>Please write the name of the channel_id you want to survey.</p>
+                  </div>
+
+                  <script>
+                     let alertText6 = "Votre choix à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     <input type="hidden" name="id" value="youtube_last_video" />
+                     <input type="hidden" name="typeform" value="action" />
+                     
+                     <label for="channel_id">channel_id</label>
+                     <input type="text" name="channel_id" />
+                 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertText6)">Submit</button>
+                  </form>
+                  
+
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div> 
+
+         <div id="myModalActionYoutube2" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">New comment on a video</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert everytime there are a New comment on a video. </p>
+                     <p>Please write the name of the video_id you want to survey.</p>
+                  </div>
+
+                  <script>
+                     let alertTextyt2 = "Votre choix à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     <input type="hidden" name="id" value="youtube_last_comment" />
+                     <input type="hidden" name="typeform" value="action" />
+
+                     <label for="video_id">video_id</label>
+                     <input type="text" name="video_id"/>
+                 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertTextyt2)">Submit</button>
+                  </form>
+                  
+
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div> 
+         
+         <div id="myModalActionYoutube3" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Last sub on your account</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                     <p>You choose to receive a message with your last subscription </p>
+                     <p>Please write the name of the video_id you want to survey.</p>
+                  </div>
+
+                  <script>
+                     let alertTextyt3 = "Votre choix à bien été pris en compte. Choisissez votre REAction. "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="action-form">
+                     <label for="workflow_name">Workflow name</label>
+                     <input type="text" name="workflow_name" />
+                     <input type="hidden" name="id" value="youtube_last_sub" />
+                     <input type="hidden" name="typeform" value="action" />
+                 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertTextyt3)">Submit</button>
+                  </form>
+                  
+
+                  <!-- END Formulaire part -->
+                  
+                  <div class="modal-body">
+                     <p>Choose your Reaction from here.</p>
+                     <div class="btn-group">
+                        <div class="dropdown">
+                           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             REAction
+                           </button>
+                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <a class="dropdown-item" href="#myModalREActionEmail" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Google Email</a>
+                             <a class="dropdown-item" href="#myModalREActionTicket" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Github Ticket</a>
+                             <a class="dropdown-item" href="#myModalREActionEvent" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Calendar Event </a>
+                             <a class="dropdown-item" href="#myModalREActionGist" data-toggle="modal" data-dismiss="modal" id="MainNavHelp">Creat Gist </a>
+
+                           </div>
+                         </div>
+                      </div>                    
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div> 
+          
+         <!---------------------------------------------REAction-------------------------------------------------------------------------->
+         <div id="myModalREActionEmail" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title"> Receive by Email</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                     <p>You choose to receive alert of the action by email. </p>
+                     <p>Please write the email on which you want to receive alert.</p>
+                  </div>
+                  
+                  <script>
+                     let alertText7 = "Les informations bien été pris en compte. Félication, vous avez creer votre action/reaction ! Vous pouvez fermer la modal"
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="reaction-form">
+                     <input type="hidden" name="typeform" value="reaction" />
+                     <input type="hidden" name="id" value="gmail_send_mail" />
+
+                     <label for="email">From : (email)</label>
+                     <input type="email" name="from" />
+                     
+                     <label for="email">To : (email)</label>
+                     <input type="email" name="to" />
+                 
+                     <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertText7)" >Submit</button>
+                   </form>
+                  <!-- END Formulaire part -->
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div>
+
+           <div id="myModalREActionTicket" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Ticket Github</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                  <p>You choose to create a Ticket github. </p>
+                  <p>Please write the repo on which you want to create de ticket.</p>
+                  </div>
+
+                  <script>
+                     let alertText8 = "Les informations bien été pris en compte. Félication, vous avez creer votre action/reaction ! Vous pouvez fermer la modal "
+                  </script>
+
+                  <!-- Formulaire part -->
+                  <form class="reaction-form">
+                     <input type="hidden" name="typeform" value="reaction" />
+                     <input type="hidden" name="id" value="gh_create_issue" />
+
+                     <label for="repo">Repo</label>
+                     <input type="text" name="repo" />
+
+                     <label for="titre">Titre</label>
+                     <input type="text" name="titre"/>
+               
+                 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertText8)">Submit</button>
+                  </form>
+                  <!-- END Formulaire part -->
+                  <!-- END Formulaire part -->
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div>
+
+           <div id="myModalREActionEvent" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Event Calendar</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                  <p>You choose to create a event on your Google Calendar. </p>
+                  <p>Please complete the information that we need to create the event.</p>
+                  </div>
+
+                  <script>
+                     let alertText9 = "Les informations bien été pris en compte. Félication, vous avez creer votre action/reaction ! Vous pouvez fermer la modal"
+                  </script>
+                  
+                  <!-- Formulaire part -->
+                  <form class="reaction-form">
+                     <input type="hidden" name="typeform" value="reaction" />
+                     <input type="hidden" name="id" value="calendar_create_event" />
+
+
+                     <label for="event_summary">Summary</label>
+                     <input type="text" name="event_summary" />
+                 
+                     <label for="date_start">Date start</label>
+                     <input placeholder="YYYY-MM-DDTHH:mm:SS-HH:MM" type="text" name="date_start"  />
+
+                     <label for="date_end">Date end</label>
+                     <input placeholder="YYYY-MM-DDTHH:mm:SS-HH:MM" type="text" name="date_end"  />
+                 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertText9)">Submit</button>
+                  </form>
+                  <!-- END Formulaire part -->
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div>
+           
+           <div id="myModalREActionGist" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Event Gist</h4> 
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="text-modal-content">
+                  <p>You choose to create a gist. </p>
+                  </div>
+
+                  <script>
+                     let alertText9s = "Les informations bien été pris en compte. Félication, vous avez creer votre action/reaction ! Vous pouvez fermer la modal"
+                  </script>
+                  
+                  <!-- Formulaire part -->
+                  <form class="reaction-form">
+                     <input type="hidden" name="typeform" value="reaction" />
+                     <input type="hidden" name="id" value="gh_create_gist" /> 
+                    <button class="submit-btn" type="submit" onclick="formEvent(), myAlert(alertText9s)">Submit</button>
+                  </form>
+                  <!-- END Formulaire part -->
+                  <div class="modal-footer">
+                  </div>
+               </div>
+            </div>
+           </div>
+         <!----------------------------------------------------------------------------------------------------------------------->
+<div id="main-content" class="container mt-5 flex-grow-1">
+   <div id="content-home" class="page">
+      <!--DIV FOR  THE USER INFO-->
+      <div class="text-center hero">
+         <img
+            class="mb-3 app-logo"
+            src="/images/logo.png"
+            alt="JavaScript logo"
+            width="1200"
+            />
+         <h1 class="mb-4">Welcome to AREA</h1>
+         <p class="info_log">
+            Get Log to Google, Github and the login button get access to more services (make sure the email you use in the auth0 and with API is the same)
+         </p>
+         <div >
+            <!--</div>style="z-index: 999; position: fixed">-->
+            <!--<button type="button" id="create_widget" onclick="alert('You must be log for be able to create and personalise your DashTek ')">Create a Widget</button>-->
+         </div>
+        <div id="listOfWorkflow">
+         <h1>Your Deployed Actions/Reaction</h1>
+            <p id="first">Click on the cross for delete and stopping the action</p>
+            <div class="list-worflow">
+               <ul >
+                  <li class="list">Action1<button type="button" class="deletelist" data-dismiss="modal">&times;</button></li>
+                  <li class="list">Action2<button type="button" class="deletelist" data-dismiss="modal">&times;</button></li>
+                  <li class="list">Action3<button type="button" class="deletelist" data-dismiss="modal">&times;</button></li>
+                  <li class="list">Action2<button type="button" class="deletelist" data-dismiss="modal">&times;</button></li>
+                  <li class="list">Action4<button type="button" class="deletelist" data-dismiss="modal">&times;</button></li>      
+               </ul>
+            </div>
+        </div>
+      </div>
+   </div>
+   <div class="page" id="content-profile">
+      <div class="container">
+         <div class="row align-items-center profile-header">
+            <div class="col-md-2">
+               <img
+                  alt="User's profile picture"
+                  class="rounded-circle img-fluid profile-image mb-3 mb-md-0"
+                  />
+            </div>
+            <div class="col-md">
+               <h2 class="user-name"></h2>
+               <p class="lead text-muted user-email"></p>
+            </div>
+         </div>
+         <div class="row">
+            <pre class="rounded">
+         <code id="profile-data" class="json"></code></pre>
+         </div>
+      </div>
+   </div>
+</div>
+<div id="widget-spawn" class="next-steps">
+   <!-- <h2 class="my-5 text-center">What can I do next?</h2> -->
+</div>
+<footer class="bg-light text-center p-5">
+</footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.auth0.com/js/auth0-spa-js/1.19/auth0-spa-js.production.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>

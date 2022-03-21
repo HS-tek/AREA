@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "dev": "nodemon -w ./app app/triggers.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
